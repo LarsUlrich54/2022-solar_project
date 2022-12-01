@@ -36,24 +36,35 @@ def execution(delta):
     При perform_execution == True функция запрашивает вызов самой себя по таймеру через от 1 мс до 100 мс.
     """
     
+    global model_time
+    global displayed_time
+    recalculate_space_objects_positions([dr for dr in space_objects], delta)
+    # for obj in space_objects:
+        # print(obj.Fx)
+    model_time += delta
+    
 
 
 def start_execution():
     """Обработчик события нажатия на кнопку Start.
     Запускает циклическое исполнение функции execution.
     """
-   
+    global perform_execution
+    perform_execution = True
 
-
-
-
-
+def pause_execution():
+    global perform_execution
+    perform_execution = False
+    
+    
 def stop_execution():
     """Обработчик события нажатия на кнопку Start.
     Останавливает циклическое исполнение функции execution.
     """
-   
+    global alive
+    alive = False
 
+    
 def open_file():
     """Открывает диалоговое окно выбора имени файла и вызывает
     функцию считывания параметров системы небесных тел из данного файла.
